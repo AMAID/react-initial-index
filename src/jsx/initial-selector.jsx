@@ -42,9 +42,14 @@ let InitialIndex=React.createClass({
         let clientY=(e.touches?e.touches[0].clientY:e.clientY)-40,
             searchHeight=this.refs.search.getDOMNode().offsetHeight,
             rate=parseInt(clientY/searchHeight*this.letters.length)
-
-        console.log(this.refs.list.refs[this.letters[rate]].getDOMNode(),rate,searchHeight,clientY)
-        this.scroller.scrollToElement(this.refs.list.refs[this.letters[rate]].getDOMNode())
+        if(rate<0){
+            this.scroller.scrollToElement(this.refs.list.refs[this.letters[0]].getDOMNode())
+        }else if(rate>this.letters.length-1){
+            this.scroller.scrollToElement(this.refs.list.refs[this.letters[this.letters.length-1]].getDOMNode())
+        }
+        else{
+            this.scroller.scrollToElement(this.refs.list.refs[this.letters[rate]].getDOMNode())
+        }
     },
     componentDidMount:function(){
         this.letters=[]
