@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  overflow: hidden;
+  background: #c0c0c0;
+  font-family: Arial;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+header,
+footer {
+  position: absolute;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  background: #8699a4;
+  left: 0;
+  right: 0;
+  color: #fff;
+}
+header {
+  top: 0;
+}
+footer {
+  bottom: 0;
+}
+.initial-index {
+  overflow: hidden;
+  background: #fff;
+  top: 40px;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  position: fixed;
+}
+.initial-index >div {
+  height: 100%;
+}
+.initial-index .list {
+  position: absolute;
+  left: 0;
+  right: 30px;
+  overflow: hidden;
+}
+.initial-index .list>li>label {
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  background: #e5e5e5;
+}
+.initial-index .list>li>ul>li {
+  padding: 15px;
+  border-bottom: 1px dotted #c0c0c0;
+}
+.initial-index .quick-search {
+  font-size: 10px;
+  position: absolute;
+  display: table;
+  background: #808080;
+  color: #fff;
+  width: 30px;
+  height: 100%;
+  right: 0;
+}
+.initial-index .quick-search li {
+  display: table-row;
+}
+.initial-index .quick-search li span {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  border: none;
+}

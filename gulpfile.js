@@ -6,10 +6,9 @@ var browserSync=require('browser-sync')
 var jade=require('gulp-jade')
 var autoprefixer=require('gulp-autoprefixer')
 var uglify=require('gulp-uglify')
-var webpack=require('gulp-webpack')
+var webpack=require('webpack-stream')
 var rename=require('gulp-rename')
 
-var reload=browserSync.reload()
 var error = function(e){
     util.beep()
     util.log(e.toString())
@@ -33,6 +32,10 @@ var paths={
         data:"build/data"
     }
 }
+
+gulp.task('reload',function(){
+    browserSync.reload()
+})
 gulp.task('jade', function () {
     return gulp.src([paths.develop.jade])
         .pipe(plumber({"errorHandler":error}))
@@ -52,6 +55,9 @@ gulp.task("jsx",function(){
         .pipe(plumber({"errorHandler":error}))
         .pipe(webpack(
             {
+                output:{
+                    filename:'react-initial-index.min.js'
+                },
                 module: {
                     loaders: [
                         { test: /\.json$/, loader: 'json' },
@@ -62,7 +68,6 @@ gulp.task("jsx",function(){
             }
         ))
         .pipe(uglify())
-        .pipe(rename('react-initial-index.min.js'))
         .pipe(gulp.dest(paths.build.js))
 })
 gulp.task("data",function(){
@@ -75,13 +80,11 @@ gulp.task("browser-sync", function () {
             baseDir:"build"
         }
     })
-    gulp.watch("src/data/**",["data",reload])
-    gulp.watch("src/jade/**",["jade",reload])
-    gulp.watch("src/stylus/**",["stylus"],reload)
-    gulp.watch("src/img/**",["img",reload])
-    gulp.watch("src/jsx/**",["jsx"],reload)
+    gulp.watch("src/data/**",["data","reload"])
+    gulp.watch("src/jade/**",["jade","reload"])
+    gulp.watch("src/stylus/**",["stylus","reload"])
+    gulp.watch("src/img/**",["img","reload"])
+    gulp.watch("src/jsx/**",["jsx","reload"])
 })
 
-gulp.task("default", function(){
-    gulp.run("jade","jsx","stylus","browser-sync","data");
-})
+gulp.task("default", ["jade","jsx","stylus","browser-sync","data"])
