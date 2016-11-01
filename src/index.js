@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import * as IScroll from 'iscroll'
+import IScroll from 'iscroll'
 import List from './list.js'
 import Search from './search.js'
 // import 'main.styl'
